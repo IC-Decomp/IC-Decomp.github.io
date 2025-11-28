@@ -123,7 +123,7 @@
   </div>
   <div class="container is-max-desktop">
     <div width="100%" style="font-size: 20px; text-align: center;">
-      <b>TL;DR</b>: We separate images into layers with In-Context Learning. Our method disentangles logos from objects, recomposes them onto other objects, and works across diverse layer decomposition tasks.
+      <b>TL;DR</b>: We separate images into layers via cycle-consistent LoRA tuning and In-Context Learning (ICL). Our method can clearly disentangle nonlinear logos from objects and recomposes them back.
     </div>
   </div>
 </section>
@@ -168,7 +168,7 @@
           <img src="./static/images/decompose_process.png"/>
           <div class="content has-text-justified">
             <p>
-              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process is implemented by tuning a LoRA on top of Flux-Fill.
+              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process is implemented by <b><u>tuning a LoRA on top of Flux-Fill</u></b>.
           </div>
         </div>
       </div>
@@ -216,7 +216,7 @@
           <img src="./static/images/decompose_process.png"/>
           <div class="content has-text-justified">
             <p>
-              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process is implemented by tuning a LoRA on top of Flux-Fill.
+              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process is implemented by <b><u>tuning a LoRA on top of Flux-Fill</u></b>.
             </p>
           </div>
         </div>
