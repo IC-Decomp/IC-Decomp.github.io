@@ -29,6 +29,16 @@ $(document).ready(function() {
 
     });
 
+    // Encourage browsers to lazy-load non-critical imagery to reduce initial payload.
+    document.querySelectorAll('img').forEach(function(img) {
+      if (!img.hasAttribute('data-eager')) {
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
+      } else {
+        img.setAttribute('loading', 'eager');
+      }
+    });
+
     var options = {
       slidesToScroll: 1,
       slidesToShow: 1,
