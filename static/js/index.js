@@ -39,6 +39,24 @@ $(document).ready(function() {
       }
     });
 
+    const revealBlocks = document.querySelectorAll('.reveal-step');
+    if (revealBlocks.length) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const delayMs = (parseInt(el.dataset.revealStep || '0', 10)) * 2000;
+            setTimeout(() => {
+              el.classList.add('is-visible');
+            }, delayMs);
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      revealBlocks.forEach(block => revealObserver.observe(block));
+    }
+
     var options = {
       slidesToScroll: 1,
       slidesToShow: 1,

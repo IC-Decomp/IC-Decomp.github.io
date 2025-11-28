@@ -123,17 +123,12 @@
   </div>
   <div class="container is-max-desktop">
     <div width="100%" style="font-size: 20px; text-align: center;">
-      <b>TL;DR</b>: We separate images into layers via cycle-consistent LoRA tuning and In-Context Learning (ICL). Our method can clearly disentangle nonlinear logos from objects and recomposes them back.
+      <b>TL;DR</b>: We separate images into layers with cycle-consistent LoRA tuning and In-Context Learning (ICL). Our method can clearly disentangle nonlinear logos from objects and recomposes them back.
     </div>
   </div>
 </section>
 
-
-<section class="section">
-  <div class="hero-body">
-    
-  </div>
-</section>
+<br><br>
 
 
 <section class="section hero is-light">
@@ -206,7 +201,7 @@
   </div>
 </section> -->
 
-<section class="section">
+<section class="section section-tight">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <!-- Method. -->
@@ -216,32 +211,37 @@
           <img src="./static/images/decompose_process.png"/>
           <div class="content has-text-justified">
             <p>
-              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process is implemented by <b><u>tuning a LoRA on top of Flux-Fill</u></b>.
+              Given a composite image, the model receives a masked input, a binary mask indicating the logo region, and a noise latent, and predicts both the isolated logo and the clean object. The process leverages the in-context learning capabilities of the model.
             </p>
           </div>
         </div>
       </div>
-      <!--/ Method. -->
-      
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="content has-text-centered">
-            <h3 class="title is-4">Cycle-consistent Tuning</h3>
-            <img src="./static/images/cycle_consistency.png"/>
-                <p>
-                  The model <b><u>jointly</u></b> learns decomposition and composition, ensuring the decomposed layers recompose into the original image and vice versa.
-                </p>
-          </div>
-        </div>
+    </div>
+  </div>
+</section>
 
+
+<section class="section">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Cycle-consistent Tuning</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-half has-text-centered">
+          <img class="illustration" src="./static/images/cycle_consistency.png" alt="Cycle-consistent training pipeline illustration"/>
+        </div>
         <div class="column">
-          <div class="content has-text-centered">
-            <h3 class="title is-4">Progressive Data Collection</h3>
-            <img src="./static/images/data_collection.png"/>
-            <p>
-              The training is conducted <b><u>progressively</u></b> with human-in-the-loop data evaluation and cycle-consistent composites to ensure reliable layered supervision.
-            </p>
-          </div>
+          <p class="content has-text-justified">
+            <b>Image decomposition is inherently ill-posed.</b><br> We aim to split one image into multiple layers, but the layers are not uniquely determined, especially when the image is coupled with lighting or perspective distortions.
+          </p>
+          <p class="content has-text-justified">
+            <b>However, composition is deterministic.</b><br> The key insight is that composition is deterministic. Once layers are known, putting them back together should always give the original image.
+          </p>
+          <p class="content has-text-justified">
+            <b>Therefore, we introduce cycle consistency.</b><br> We therefore train the network to decompose an image, recombine the predicted layers, and recover the input. If the reconstruction fails, the decomposition must be wrong.
+          </p>
+          <p class="content has-text-justified">
+            <b>This cyclic loop provides reliable supervision.</b><br> The model jointly learns decomposition and composition, stabilizes training under severe appearance coupling, and greatly reduces ambiguity.
+          </p>
         </div>
       </div>
     </div>
@@ -332,6 +332,31 @@
           </div>
         </div>
       </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h2 class="title is-3">Comparison with SOTA</h2>
+      <figure class="image">
+        <img src="./static/images/comparison.png" alt="Comparison with state-of-the-art methods"/>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Works on other tasks as well</h2>
+        </div>
+      </div>
       <div class="column is-full-width">
         <h3 class="title is-4">Intrinsic Decomposition</h3>
         <div class="container is-max-desktop">
@@ -406,17 +431,6 @@
           </div>
         </div>
       </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="hero-body">
-    <div class="container is-max-desktop has-text-centered">
-      <h2 class="title is-3">Comparison with SOTA</h2>
-      <figure class="image">
-        <img src="./static/images/comparison.png" alt="Comparison with state-of-the-art methods"/>
-      </figure>
-    </div>
   </div>
 </section>
 

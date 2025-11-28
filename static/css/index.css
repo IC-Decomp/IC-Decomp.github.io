@@ -2,6 +2,22 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.section {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.section + .section,
+.section + .hero,
+.hero + .section {
+  margin-top: -1rem;
+}
+
+.hero .hero-body {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
 
 .footer .icon-link {
     font-size: 25px;
@@ -154,4 +170,24 @@ body {
 }
 #interpolation-image-wrapper img {
   border-radius: 5px;
+}
+
+.reveal-step {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-tight {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.section-tight .hero-body {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
